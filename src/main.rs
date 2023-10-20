@@ -59,7 +59,7 @@ fn input() -> String {
     return input;
 }
 
-/// Adds two integers together
+/// Adds two integers together.
 /// 
 /// # Examples
 /// ```
