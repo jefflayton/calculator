@@ -32,6 +32,9 @@ fn main() {
         "**" => {
             answer = power(first_number, second_number);
         }
+        "%" => {
+            answer = modulo(first_number, second_number);
+        }
         _ => println!("Pick a valid operator.")
     }
 
@@ -56,7 +59,7 @@ fn input() -> String {
     return input;
 }
 
-/// Adds two integers together
+/// Adds two integers together.
 /// 
 /// # Examples
 /// ```
@@ -122,4 +125,18 @@ fn divide(a: i32, b: i32) -> i32 {
 /// ```
 fn power(a: i32, b: i32) -> i32 {
     return a.pow(b as u32);
+}
+
+/// Returns the mod of the first integer
+/// divided by the second integer.
+/// 
+/// # Examples
+/// ```
+/// let a: i32 = 6;
+/// let b: i32 = 3;
+/// 
+/// modulo(a, b); // 0
+/// ```
+fn modulo(a: i32, b: i32) -> i32 {
+    return a % b;
 }
