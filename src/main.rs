@@ -1,44 +1,61 @@
 use std::io;
 
 fn main() {
-    // Get the first number from user
-    let first_number = input(); 
-    // Convert the string to an integer
-    let first_number: i32 = first_number.trim().parse().expect("Please type a number!");
+    let operation: String = input();
 
-    // Get the operator from user
-    let operator = input();
+    let index: i32 = calculate_operation(operation);
+    println!("{}", index);
+}
 
-    // Get the second number from user
-    let second_number = input(); 
-    // Convert the string to an integer
-    let second_number: i32 = second_number.trim().parse().expect("Please type a number!");
+fn calculate_operation(operation: String) -> i32 {
+    let mut result: i32 = 0;
+    let mut last_operator: Option<char> = None;
 
-    let mut answer: i32 = 0;
-
-    match operator.trim() {
-        "+" => {
-            answer = add(first_number, second_number);
+    for character in operation.chars() {
+        if character.is_numeric() {
+            // Parse the number and evaluate. 
+            match character.to_digit(10) {
+                Some(num) => {
+                    let number: i32 = num as i32;
+                    // If last_operator is defined or None
+                    match last_operator {
+                        Some(operator) => {
+                            result = evaluate(operator, result, number);
+                            last_operator = None;
+                        },
+                        None => {
+                            result += number;
+                        }
+                    }
+                },
+                None => {}
+            }
+        } else if is_operator(character) {
+            last_operator = Some(character);
         }
-        "-" => {
-            answer = subtract(first_number, second_number);
-        }
-        "*" => {
-            answer = multiply(first_number, second_number);
-        }
-        "/" => {
-            answer = divide(first_number, second_number); 
-        }
-        "**" => {
-            answer = power(first_number, second_number);
-        }
-        "%" => {
-            answer = modulo(first_number, second_number);
-        }
-        _ => println!("Pick a valid operator.")
     }
 
-    println!("Answer: {}", answer);
+    return result;
+}
+
+fn is_operator(operator: char) -> bool {
+    let operators: &str = "+-*/%^";
+    return operators.contains(operator);
+}
+
+fn evaluate(operator: char, first_number: i32, second_number: i32) -> i32 {
+    return match operator {
+        '+' => add(first_number, second_number),
+        '-' => subtract(first_number, second_number),
+        '*' => multiply(first_number, second_number),
+        '/' => divide(first_number, second_number),
+        '%' => modulo(first_number, second_number),
+        '^' => power(first_number, second_number),
+        _ => {
+            println!("Operator not found.");
+            return -1;
+        }
+    }
 }
 
 /// Get input from user
