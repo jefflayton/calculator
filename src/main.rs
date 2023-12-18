@@ -3,8 +3,8 @@ use std::io;
 fn main() {
     let operation: String = input();
 
-    let index: i32 = calculate_operation(operation);
-    println!("{}", index);
+    let answer: i32 = calculate_operation(operation);
+    println!("{}", answer);
 }
 
 fn calculate_operation(operation: String) -> i32 {
@@ -13,7 +13,7 @@ fn calculate_operation(operation: String) -> i32 {
 
     for character in operation.chars() {
         if character.is_numeric() {
-            // Parse the number and evaluate. 
+            // Parse the number and evaluate.
             match character.to_digit(10) {
                 Some(num) => {
                     let number: i32 = num as i32;
@@ -22,12 +22,12 @@ fn calculate_operation(operation: String) -> i32 {
                         Some(operator) => {
                             result = evaluate(operator, result, number);
                             last_operator = None;
-                        },
+                        }
                         None => {
                             result += number;
                         }
                     }
-                },
+                }
                 None => {}
             }
         } else if is_operator(character) {
@@ -55,11 +55,11 @@ fn evaluate(operator: char, first_number: i32, second_number: i32) -> i32 {
             println!("Operator not found.");
             return -1;
         }
-    }
+    };
 }
 
 /// Get input from user
-/// 
+///
 /// # Examples
 /// ```
 /// let mut first_number = input(); // 1
@@ -77,12 +77,12 @@ fn input() -> String {
 }
 
 /// Adds two integers together.
-/// 
+///
 /// # Examples
 /// ```
 /// let a: i32 = 1;
 /// let b: i32 = 2;
-/// 
+///
 /// add(a, b); // 3
 /// ```
 fn add(a: i32, b: i32) -> i32 {
@@ -91,12 +91,12 @@ fn add(a: i32, b: i32) -> i32 {
 
 /// Subtracts the first integer
 /// from the second integer.
-/// 
+///
 /// # Examples
 /// ```
 /// let a: i32 = 5;
 /// let b: i32 = 4;
-/// 
+///
 /// subtract(a, b); // 1
 /// ```
 fn subtract(a: i32, b: i32) -> i32 {
@@ -104,12 +104,12 @@ fn subtract(a: i32, b: i32) -> i32 {
 }
 
 /// Multiples two integers together.
-/// 
+///
 /// # Examples
 /// ```
 /// let a: i32 = 4;
 /// let b: i32 = 2;
-/// 
+///
 /// multiply(a, b); // 8
 /// ```
 fn multiply(a: i32, b: i32) -> i32 {
@@ -118,12 +118,12 @@ fn multiply(a: i32, b: i32) -> i32 {
 
 /// Divides the first integer
 /// by the second integer.
-/// 
+///
 /// # Examples
 /// ```
 /// let a: i32 = 4;
 /// let b: i32 = 2;
-/// 
+///
 /// divide(a, b); // 2
 /// ```
 fn divide(a: i32, b: i32) -> i32 {
@@ -132,12 +132,12 @@ fn divide(a: i32, b: i32) -> i32 {
 
 /// Returns the first integer to the
 /// power of the second integer.
-/// 
+///
 /// # Examples
 /// ```
 /// let a: i32 = 2;
 /// let b: i32 = 3;
-/// 
+///
 /// power(a, b); // 8
 /// ```
 fn power(a: i32, b: i32) -> i32 {
@@ -146,12 +146,12 @@ fn power(a: i32, b: i32) -> i32 {
 
 /// Returns the mod of the first integer
 /// divided by the second integer.
-/// 
+///
 /// # Examples
 /// ```
 /// let a: i32 = 6;
 /// let b: i32 = 3;
-/// 
+///
 /// modulo(a, b); // 0
 /// ```
 fn modulo(a: i32, b: i32) -> i32 {
