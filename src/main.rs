@@ -1,44 +1,47 @@
 use std::io;
 
 fn main() {
-    // Get the first number from user
-    let first_number = input(); 
-    // Convert the string to an integer
-    let first_number: i32 = first_number.trim().parse().expect("Please type a number!");
-
-    // Get the operator from user
-    let operator = input();
-
-    // Get the second number from user
-    let second_number = input(); 
-    // Convert the string to an integer
-    let second_number: i32 = second_number.trim().parse().expect("Please type a number!");
-
     let mut answer: i32 = 0;
 
-    match operator.trim() {
-        "+" => {
-            answer = add(first_number, second_number);
-        }
-        "-" => {
-            answer = subtract(first_number, second_number);
-        }
-        "*" => {
-            answer = multiply(first_number, second_number);
-        }
-        "/" => {
-            answer = divide(first_number, second_number); 
-        }
-        "**" => {
-            answer = power(first_number, second_number);
-        }
-        "%" => {
-            answer = modulo(first_number, second_number);
-        }
-        _ => println!("Pick a valid operator.")
-    }
+    loop {
+        // Get the operator from user
+        let operator = input();
 
-    println!("Answer: {}", answer);
+        if operator.trim() == "clear" {
+            answer = 0;
+            println!("Answer cleared.");
+            continue;
+        }
+
+        // Get the number from user
+        let number = input();
+        // Convert the string to an integer
+        let number: i32 = number.trim().parse().expect("Please type a number!");
+
+        match operator.trim() {
+            "+" => {
+                answer = add(answer, number);
+            }
+            "-" => {
+                answer = subtract(answer, number);
+            }
+            "*" => {
+                answer = multiply(answer, number);
+            }
+            "/" => {
+                answer = divide(answer, number);
+            }
+            "**" => {
+                answer = power(answer, number);
+            }
+            "%" => {
+                answer = modulo(answer, number);
+            }
+            _ => println!("Pick a valid operator.")
+        }
+
+        println!("Answer: {}", answer);
+    }
 }
 
 /// Get input from user
